@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Glabal para Login
+
+Cypress.Commands.add('login', (usuario, clave) => {
+  // 1. Visitar la página de login
+  cy.visit('https://fabrica2023.estrategiasegura.biz/');
+  
+  // 2. Ingresar credenciales
+  cy.get('#Email').type(usuario);
+  cy.get('#Password').type(clave);
+  
+  // 3. Hacer clic en Entrar
+  cy.get('#Inicio').click();
+
+  // 4. (Opcional pero recomendado) Validar que el login fue exitoso 
+  // antes de continuar con la prueba. Por ejemplo, validar que aparece el menú.
+  cy.get('.navbar-brand').should('contain.text', 'FABRICA DE CRÉDITOS'); 
+});
